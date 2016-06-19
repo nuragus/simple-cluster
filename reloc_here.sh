@@ -1,6 +1,8 @@
 #!/bin/bash
 
-checkip=`/bpm/scripts/check_ip.sh`;
+source settings.cfg;
+
+checkip=`$directory/check_ip.sh`;
 checkowner=`cat /bpm/scripts/i_was_owner`;
 thishost=`hostname`;
 timestamp=$(date +%d%m%Y-%T);
@@ -9,18 +11,19 @@ echo $timestamp >> /bpm/scripts/reloc.log;
 
 if [ $checkip == "0" ]; then
   if [ $checkowner == "0" ]; then
-    echo "i was the owner; sleeping for 1 minute before mounting and startup postgres" >> /bpm/scripts/reloc.log;
+    echo $timestamp": i was the owner; sleeping for 10 check cycles before mounting and startup postgres" >> /bpm/scripts/reloc.log;
     for i in {1..10}; do
       if [ `/bpm/scripts/check_db.sh` == "0" ]; then
-        echo "the database is running! probably at the other node" >> /bpm/scripts/reloc.log;
+        echo $timestamp": postgres is running! probably at the other node" >> /bpm/scripts/reloc.log;
         exit 0;
       fi
-	echo "still sleeping... preventing split brain" >> /bpm/scripts/reloc.log;
+	echo $timestamp": still sleeping... preventing split brain" >> /bpm/scripts/reloc.log;
 	sleep 1;
     done;
     if [ `/bpm/scripts/check_db.sh` == "1" ]; then
-       echo "after sleeping 1 minute , postgres still down; starting up here" >> /bpm/scripts/reloc.log;
+       echo $timestamp": after sleeping long enough, postgres still down; starting up here" >> /bpm/scripts/reloc.log;
        exec "/bpm/scripts/start_db.sh";
+       echo $timestamp": now i am the owner of postgres" >> /bpm/scripts/reloc.log;
     fi
   else
     echo "i was not the owner, seems i can start now" >> /bpm/scripts/reloc.log;
