@@ -7,5 +7,10 @@ configurable features, this cluster engine is simply bash schell scripts
 performing startup, shutdown, and preventing split-brain.
 
 #Objective
-- Very easy enough to implement
-- Easy to understand 
+- Very easy to implement
+- Easy to understand
+
+#Warning
+This scripts is in very early stage. While we tested it thoroughly in
+our own configuration, it may not work in other configuration. Use at
+your own risk.
