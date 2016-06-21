@@ -9,7 +9,7 @@
 source ../settings.cfg;
 
 # Stopping floating ip
-ifconfig $floating_device down > dev/null;
+ifconfig $floating_device down > /dev/null;
 if [ $? == "0" ]; then
   echo $timestamp": success deactivating floating ip" >> $log_directory/shutdown.log;
 else
@@ -25,7 +25,7 @@ else
 fi
 
 #Dismounting filesystem
-umount /postgres
+umount /postgres > /dev/null;
 if [ $? == "0" ]; then
   echo $timestamp": success dismounting postgres filesystem" >> $log_directory/shutdown.log;
 else
