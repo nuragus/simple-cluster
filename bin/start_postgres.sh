@@ -21,7 +21,9 @@ else
 fi
 
 # Activate floating IP
-ifconfig $floating_device $floating_ip netmask $floating_netmask > /dev/null;
+ip_exec="ifconfig "$floating_device" "$floating_ip" netmask"$floating_netmask;
+echo $ip_exec;
+#ifconfig $floating_device $floating_ip netmask $floating_netmask > /dev/null;
 if [ $? == "0" ]; then
   echo $timestamp": success activating floating ip" >> $log_directory/startup.log;
 else
