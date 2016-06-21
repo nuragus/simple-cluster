@@ -10,10 +10,10 @@ source ../settings.cfg;
 
 timestamp=$(date +%d%m%Y-%T);
 
-echo $timestamp": starting up database package" >> $log_directory/startup.log;
+echo $timestamp": starting up database package" > $log_directory/startup.log;
 
 # Mounting postgres
-mount $postgres_mount >> /dev/null;
+mount $postgres_mount > /dev/null 2>&1;
 if [ $? == "0" ]; then
   echo $timestamp": success mounting postgres" >> $log_directory/startup.log;
 else
@@ -21,7 +21,7 @@ else
 fi
 
 # Activate floating IP
-ifconfig $floating_device $floating_ip netmask $floating_netmask >> /dev/null;
+ifconfig $floating_device $floating_ip netmask $floating_netmask > /dev/null;
 if [ $? == "0" ]; then
   echo $timestamp": success activating floating ip" >> $log_directory/startup.log;
 else
@@ -29,7 +29,7 @@ else
 fi
 
 # Starting up database
-/bin/su -l postgres -c 'pg_ctl -D $PGDATA start'
+/bin/su -l postgres -c 'pg_ctl -D $PGDATA start' > /dev/null
 if [ $? == "0" ]; then
   echo $timestamp": success starting up database" >> $log_directory/startup.log;
 else
