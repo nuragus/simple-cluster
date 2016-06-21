@@ -31,7 +31,7 @@ else
 fi
 
 # Starting up database
-/bin/su -l postgres -c 'pg_ctl -D $PGDATA start' > /dev/null
+/bin/su -l postgres -c 'source ~/pg_env.sh; pg_ctl -D $PGDATA start' > /dev/null
 if [ $? == "0" ]; then
   echo $timestamp": success starting up database" >> $log_directory/startup.log;
 else
