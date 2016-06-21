@@ -1,0 +1,4 @@
+21062016-17:18:39: starting up database package
+21062016-17:18:39: failed mounting postgres
+21062016-17:18:39: success activating floating ip
+21062016-17:18:39: failed starting up database
