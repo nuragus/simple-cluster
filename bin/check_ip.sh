@@ -1,9 +1,13 @@
+# check_ip.sh
+# Pinging reference IP to know network status
+
 #!/bin/bash
 
-checkhost=192.168.56.1
-count=$( ping -c 1 $checkhost | grep ttl | wc -l );
+source ../settings.cfg;
 
-if [ $count -eq 0 ];
+count=$( ping -c 5 -W 1 $reference_ip | grep ttl | wc -l );
+
+if [ $count -lt 3 ];
 then
         echo "1"
         RETVAL=1;
