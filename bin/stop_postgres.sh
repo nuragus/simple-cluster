@@ -8,26 +8,30 @@
 # Read configuration file
 source ../settings.cfg;
 
+timestamp=$(date +%d%m%Y-%T);
+printf "%s : stopping postgres\n" $timestamp >> $log_directory/shutdown.log
+
 # Stopping floating ip
+timestamp=$(date +%d%m%Y-%T);
 ifconfig $floating_device down > /dev/null;
 if [ $? == "0" ]; then
-  echo $timestamp": success deactivating floating ip" >> $log_directory/shutdown.log;
+  printf "%s : success deactivating floating ip\n" $timestamp >> $log_directory/shutdown.log;
 else
-  echo $timestamp": failed deactivating floating ip" >> $log_directory/shutdown.log;
+  printf $timestamp"%s : failed deactivating floating ip\n" $timestamp >> $log_directory/shutdown.log;
 fi
 
 #Stopping postgres database
 /bin/su -l postgres -c 'source ~/pg_env.sh; pg_ctl -D $PGDATA stop -m fast' > /dev/null;
 if [ $? == "0" ]; then
-  echo $timestamp": success stopping postgres" >> $log_directory/shutdown.log;
+  printf "%s : success stopping postgres\n" $timestamp >> $log_directory/shutdown.log;
 else
-  echo $timestamp": failed deactivating floating ip" >> $log_directory/shutdown.log;
+  printf "%s : failed deactivating floating ip\n" $timestamp >> $log_directory/shutdown.log;
 fi
 
 #Dismounting filesystem
 umount /postgres > /dev/null;
 if [ $? == "0" ]; then
-  echo $timestamp": success dismounting postgres filesystem" >> $log_directory/shutdown.log;
+  printf "%s : success dismounting postgres filesystem\n" $timestamp >> $log_directory/shutdown.log;
 else
-  echo $timestamp": failed dismounting floating ip" >> $log_directory/shutdown.log;
+  printf "%s : failed dismounting floating ip\n" $timestamp >> $log_directory/shutdown.log;
 fi

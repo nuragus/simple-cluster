@@ -9,30 +9,30 @@
 source ../settings.cfg;
 
 
-printf "%s : starting up database package" $timestamp >> $log_directory/startup.log;
+printf "%s : starting up postgres\n" $timestamp >> $log_directory/startup.log;
 
 # Mounting postgres
 timestamp=$(date +%d%m%Y-%T);
 mount $postgres_mount > /dev/null 2>&1;
 if [ $? == "0" ]; then
-  printf "%s : success mounting postgres" $timestamp >> $log_directory/startup.log;
+  printf "%s : success mounting postgres\n" $timestamp >> $log_directory/startup.log;
 else
-  printf "%s : failed mounting postgres" $timestmp >> $log_directory/startup.log;
+  printf "%s : failed mounting postgres\n" $timestmp >> $log_directory/startup.log;
 fi
 
 # Activate floating IP
 timestamp=$(date +%d%m%Y-%T);
 ifconfig $floating_device $floating_ip netmask $floating_netmask > /dev/null;
 if [ $? == "0" ]; then
-  printf "%s : success activating floating ip" $timestamp >> $log_directory/startup.log;
+  printf "%s : success activating floating ip\n" $timestamp >> $log_directory/startup.log;
 else
-  printf "%s : failed activating floating ip" $timestamp >> $log_directory/startup.log;
+  printf "%s : failed activating floating ip\n" $timestamp >> $log_directory/startup.log;
 fi
 
 # Starting up database
 /bin/su -l postgres -c 'source ~/pg_env.sh; pg_ctl -D $PGDATA start' > /dev/null
 if [ $? == "0" ]; then
-  printf "%s : success starting up database" $timestamp >> $log_directory/startup.log;
+  printf "%s : success starting up database\n" $timestamp >> $log_directory/startup.log;
 else
-  printf "%s : failed starting up database" $timestamp >> $log_directory/startup.log;
+  printf "%s : failed starting up database\n" $timestamp >> $log_directory/startup.log;
 fi
