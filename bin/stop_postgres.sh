@@ -25,7 +25,7 @@ fi
 if [ $? == "0" ]; then
   printf "%s : success stopping postgres\n" $timestamp >> $log_directory/shutdown.log;
 else
-  printf "%s : failed deactivating floating ip\n" $timestamp >> $log_directory/shutdown.log;
+  printf "%s : failed stopping postgres\n" $timestamp >> $log_directory/shutdown.log;
 fi
 
 #Dismounting filesystem
@@ -33,5 +33,5 @@ umount /postgres > /dev/null;
 if [ $? == "0" ]; then
   printf "%s : success dismounting postgres filesystem\n" $timestamp >> $log_directory/shutdown.log;
 else
-  printf "%s : failed dismounting floating ip\n" $timestamp >> $log_directory/shutdown.log;
+  printf "%s : failed dismounting postgres filesystem\n" $timestamp >> $log_directory/shutdown.log;
 fi
