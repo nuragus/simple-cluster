@@ -2,7 +2,6 @@
 
 source $main_directory/settings.cfg;
 
-target=192.168.56.105;
 this_host=`hostname`
 count=$( for i in {1..10}; do nc -w 1 -z -v $floating_ip 5432; done | grep succeeded | wc -l );
 
