@@ -34,8 +34,8 @@ if [ $checkip == "0" ]; then
     elif [ $thishost == "node2" ]; then
       ssh root@node1 $main_directory/stop_postgres.sh;
     if
-    exec $start_exec;
+    exec `$start_exec`;
   fi
 else
-  echo "my network is problem; do nothing to prevent split brain; need human intervention" >> /bpm/scripts/reloc.log;
+  echo "my network is problem; do nothing to prevent split brain; need human intervention" >> $log_directory/reloc.log;
 fi
