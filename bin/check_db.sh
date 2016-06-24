@@ -3,7 +3,6 @@
 this_host=`hostname`
 
 source $main_directory/settings.cfg;
-echo $pg_exec;
 
 count=$( for i in {1..5}; do $pg_exec/psql -U job-bpm -d job-bpm -h $floating_ip -c 'select COUNT(*) FROM bpm_config'; done | grep row | wc -l ) > /dev/null;
 timestamp=$(date +%d%m%Y-%T);
