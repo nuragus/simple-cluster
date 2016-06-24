@@ -4,7 +4,7 @@
 # Reference IP is being pinged 5 times. If 3 or more, it is a success. This is to allow intermittance
 
 # Read configuration file
-source ../settings.cfg;
+source $bin_directory/settings.cfg;
 
 timestamp=$(date +%d%m%Y-%T);
 count=$( ping -c 5 -W 1 $reference_ip | grep ttl | wc -l );
