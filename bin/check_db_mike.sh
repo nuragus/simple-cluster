@@ -2,6 +2,8 @@
 
 this_host=`hostname`
 
+source $main_directory/settings.cfg;
+
 count=$( for i in {1..5}; do $pg_exec/psql -U job-bpm -d job-bpm -h $floating_ip -c 'select CAST(COUNT(*) AS BIT) FROM bpm_config'; done | grep 0 | wc -l ) > /dev/null;
 timestamp=$(date +%d%m%Y-%T);
 
