@@ -23,8 +23,8 @@ else
 	else
 		echo "1" > /$db_directory/i_was_owner.db;
 	fi
-  echo $timestamp >> /$db_directory/checkdb.log;
-  echo "the database is running at:"$owner >> /$db_directory/checkdb.log;
+  echo $timestamp >> /$log_directory/checkdb.log;
+  echo "the database is running at:"$owner >> /$log_directory/checkdb.log;
         RETVAL=0;
 fi
 
