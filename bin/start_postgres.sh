@@ -6,7 +6,7 @@
 #  - Start Postgres
 
 # Read configuration file
-source $main_directory/settings.cfg;
+source /opt/simple-cluster/settings.cfg;
 
 timestamp=$(date +%d%m%Y-%T);
 printf "%s : starting up postgres\n" $timestamp >> $log_directory/startup.log;

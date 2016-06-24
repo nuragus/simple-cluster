@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source $main_directory/settings.cfg;
+source /opt/simple-cluster/settings.cfg;
 
 checkip=`$bin_directory/check_ip.sh`;
 checkowner=`cat $db_directory/i_was_owner.db`;
