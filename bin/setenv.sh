@@ -1,3 +1,3 @@
 #!/bin/bash
 
-source /simple-cluster/settings.cfg
+export main_directory=/simple-cluster
