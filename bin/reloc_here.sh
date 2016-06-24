@@ -13,18 +13,18 @@ echo $timestamp >> $log_directory/reloc.log;
 
 if [ $checkip == "0" ]; then
   if [ $checkowner == "0" ]; then
-    echo $timestamp": i was the owner; sleeping for 10 check cycles before mounting and startup postgres" >> /bpm/scripts/reloc.log;
+    echo $timestamp": i was the owner; sleeping for 10 check cycles before mounting and startup postgres" >> $logfile;
     for i in {1..10}; do
-      if [ `/bpm/scripts/check_db.sh` == "0" ]; then
+      if [ `$bin_directory/check_db.sh` == "0" ]; then
         echo $timestamp": postgres is running! probably at the other node" >> $logfile;
         exit 0;
       fi
 	echo $timestamp": still sleeping... preventing split brain" >> $logfile;
 	sleep 1;
     done;
-    if [ `/bpm/scripts/check_db.sh` == "1" ]; then
+    if [ `$bin_directory/check_db.sh` == "1" ]; then
        echo $timestamp": after sleeping long enough, postgres still down; starting up here" >> $logfile;
-       exec "/bpm/scripts/start_db.sh";
+       exec "$bin_directory/start_db.sh";
        echo $timestamp": now i am the owner of postgres" >> $logfile
     fi
   else
