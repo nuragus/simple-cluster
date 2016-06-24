@@ -33,7 +33,7 @@ if [ $checkip == "0" ]; then
       ssh root@node2 $main_directory/stop_postgres.sh;
     elif [ $thishost == "node2" ]; then
       ssh root@node1 $main_directory/stop_postgres.sh;
-    if
+    fi
     exec `$start_exec`;
   fi
 else
