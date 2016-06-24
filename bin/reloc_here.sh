@@ -2,7 +2,7 @@
 
 source $main_directory/settings.cfg;
 
-checkip=`$main_directory/check_ip.sh`;
+checkip=`$bin_directory/check_ip.sh`;
 checkowner=`cat $db_directory/i_was_owner.db`;
 thishost=`hostname`;
 timestamp=$(date +%d%m%Y-%T);
