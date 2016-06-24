@@ -6,7 +6,7 @@
 #  - Dismounting filesystem
 
 # Read configuration file
-source ../settings.cfg;
+source $main_directory/settings.cfg;
 
 timestamp=$(date +%d%m%Y-%T);
 printf "%s : stopping postgres\n" $timestamp >> $log_directory/shutdown.log

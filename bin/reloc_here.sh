@@ -2,7 +2,7 @@
 
 source settings.cfg;
 
-checkip=`$directory/check_ip.sh`;
+checkip=`$main_directory/check_ip.sh`;
 checkowner=`cat /bpm/scripts/i_was_owner`;
 thishost=`hostname`;
 timestamp=$(date +%d%m%Y-%T);
