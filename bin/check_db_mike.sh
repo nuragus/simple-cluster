@@ -16,7 +16,7 @@ then
   echo "1"
   RETVAL=1;
 else
-  owner=`ssh hant00@192.168.56.105 "hostname"`;
+  owner=`ssh root@$floating_ip "hostname"`;
   echo "0";
 	if [ $owner == $this_host ];
 	then
