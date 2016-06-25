@@ -37,5 +37,6 @@ if [ $checkip == "0" ]; then
     exec `$start_exec`;
   fi
 else
-  echo "my network is problem; do nothing to prevent split brain; need human intervention" >> $log_directory/reloc.log;
+  echo "my network is problem; shutting down self to prevent split brain; need human intervention" >> $log_directory/reloc.log;
+  exec `$bin_directory/stop_postgres.sh`;
 fi
